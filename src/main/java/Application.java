@@ -18,7 +18,7 @@ public class Application {
         userInterface.opening();
         int number = userInterface.getInfo();
 
-        
+
         boolean decision = userInterface.willCross();
 
 
