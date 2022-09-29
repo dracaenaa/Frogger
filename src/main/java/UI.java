@@ -67,7 +67,10 @@ public class UI {
         String favoriteNumber = myScanner.nextLine();
 
         //entry validation
-        while (Integer.parseInt(favoriteNumber) > 10 || Integer.parseInt(favoriteNumber) < 1) {
+        while (!favoriteNumber.equals("1") && !favoriteNumber.equals("2") && !favoriteNumber.equals("3") &&
+                !favoriteNumber.equals("4") && !favoriteNumber.equals("5") && !favoriteNumber.equals("6") &&
+                !favoriteNumber.equals("7") && !favoriteNumber.equals("8") && !favoriteNumber.equals("9") &&
+                !favoriteNumber.equals("10")) {
             System.out.println(froggoInfo.getName() + " can only count from 1-10, they don't know what that means :(");
             System.out.println("Please enter a number:");
             favoriteNumber = myScanner.nextLine();
