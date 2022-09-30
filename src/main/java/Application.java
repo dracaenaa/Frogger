@@ -17,11 +17,20 @@ public class Application {
 
         userInterface.opening();
         int number = userInterface.getInfo();
+        StreetCrossing streetCrossing = new StreetCrossing(number);
+
+        //run while loop until froggo dies
+        while (isRunning) {
+
+            boolean decision = userInterface.willCross();
+
+            if (decision) {
+                streetCrossing.crossStreet();
+            }
 
 
-        boolean decision = userInterface.willCross();
 
-
+        }
 
 
     }
