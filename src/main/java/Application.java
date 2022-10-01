@@ -18,16 +18,31 @@ public class Application {
         userInterface.opening();
         int number = userInterface.getInfo();
         StreetCrossing streetCrossing = new StreetCrossing(number);
+        userInterface.waitObservation();
 
         //run while loop until froggo dies
         while (isRunning) {
 
-            boolean decision = userInterface.willCross();
-
-            if (decision) {
-                streetCrossing.crossStreet();
+            if (streetCrossing.crosswalkGoing()) {
+                if (userInterface.willCross()) {
+                    userInterface.crossSafelyWithCrosswalk();
+                    isRunning = false;
+                }
+                else {
+                    userInterface.crosswalkWait();
+                }
             }
+            else {
+                if (userInterface.willCross()) {
+                    isRunning = streetCrossing.crossStreet();
+                } else {
+                    userInterface.waitObservation();
+                }
 
+            }
+            if (streetCrossing.getStreetWidth() == streetCrossing.getLanesCrossed()) {
+                userInterface.crossToOtherSideOfRoad();
+            }
 
 
         }

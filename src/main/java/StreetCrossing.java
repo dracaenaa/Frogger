@@ -7,8 +7,9 @@ public class StreetCrossing {
 //Checks if they cross while there will be traffic, if so froggo goes squish :( otherwise check if made it across
 
 
-    private int lanesCrossed = 0;
+    private int lanesCrossed;
     private int streetWidth;
+    private UI userInterface = new UI();
 
     public StreetCrossing(int favoriteNumber) {
         if (favoriteNumber > 4) {
@@ -21,15 +22,39 @@ public class StreetCrossing {
 
     public boolean crossStreet() {
         Random random = new Random();
-        int randomNum = random.nextInt(12);
+        int randomNum = random.nextInt(10);
 
-        //testing random num generator, returning true so build succeeds
-        System.out.println(randomNum);
-        return true;
+        //determines if they survived
+        if (randomNum == 9) {
+            userInterface.crossAndGetHit();
+            return false;
+        }
+        else {
+            userInterface.crossOneLane();
+            lanesCrossed++;
+            return true;
+        }
+
+
     }
 
 
+    public boolean crosswalkGoing() {
+        Random random = new Random();
+        int randomNum = random.nextInt(10);
 
+        if (randomNum == 9) {
+            userInterface.crosswalkSound();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public int getLanesCrossed() {
+        return lanesCrossed;
+    }
 
     public int getStreetWidth() {
         return streetWidth;
