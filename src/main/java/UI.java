@@ -40,13 +40,11 @@ public class UI {
         System.out.println("\n\n\n*splat* :(");
     }
 
-
     //display what they hear/smell if they go and don't get hit
     public void crossOneLane() {
         System.out.println("\nThey make it one lane safely!");
         System.out.println("They hear cars driving down the street around them, and smell the exhaust.");
     }
-
 
     //display hearing the crosswalk
     public void crosswalkSound() {
@@ -59,13 +57,12 @@ public class UI {
         System.out.println("The human made it across, the cars start driving again. Guess they should've crossed :/");
     }
 
-
-
     //display cross safely when crosswalk is on walk signal
     public void crossSafelyWithCrosswalk(FroggoInfo froggoInfo) {
         System.out.println("\nThey hear a human walking beside them, and hear the human startle when they notice " + froggoInfo.getName() + ".");
         System.out.println(froggoInfo.getName() + " gets to the other side safely! When they get home, you're waiting for them!");
-        System.out.println("You give " + froggoInfo.getName() + " some yummy " + froggoInfo.getFavoriteFood() + "!");
+        System.out.println("You give " + froggoInfo.getName() + " some yummy " + froggoInfo.getFavoriteFood() + " in their " +
+                froggoInfo.getFavoriteColor() + " bed!");
     }
 
     public void crossToOtherSideOfRoad(FroggoInfo froggoInfo) {
@@ -74,12 +71,10 @@ public class UI {
     }
 
     //display what they hear/smell if they wait, and at beginning
-    public boolean waitObservation() {
+    public void waitObservation() {
 
         System.out.println("\nThey hear cars driving down the street, and smell the exhaust.");
         System.out.println("It's hard to tell if there are more cars coming, the sounds and smells are overwhelming.");
-
-        return false;
     }
 
     //receive name input
@@ -115,9 +110,14 @@ public class UI {
 
     public String receiveFavoriteFoodInput() {
         System.out.println("What's their favorite food?");
-        return myScanner.nextLine();
+        String food = myScanner.nextLine();
+        try {
+            Integer.parseInt(food);
+            System.out.println("That's not a food!");
+            receiveFavoriteFoodInput();
+        } catch(Exception e) {
+            System.out.println("Mmmm sounds good :)");
+        }
+        return food;
     }
-
-
-
 }
