@@ -16,7 +16,6 @@ public class UI {
 //If they make it across, they get their favorite food
 
 
-    FroggoInfo froggoInfo = new FroggoInfo();
     Scanner myScanner = new Scanner(System.in);
 
 
@@ -30,7 +29,7 @@ public class UI {
     }
 
     //prompt if they want to cross or wait
-    public boolean willCross() {
+    public boolean willCross(FroggoInfo froggoInfo) {
         System.out.println("\nShould " + froggoInfo.getName() + " wait or cross?");
         String decision = myScanner.nextLine();
         return decision.equalsIgnoreCase("cross");
@@ -55,7 +54,7 @@ public class UI {
     }
 
     //display wait during crosswalk
-    public void crosswalkWait() {
+    public void crosswalkWait(FroggoInfo froggoInfo) {
         System.out.println("\n" + froggoInfo.getName() + " waits. They hear the crosswalk chirp for a while, then stop.");
         System.out.println("The human made it across, the cars start driving again. Guess they should've crossed :/");
     }
@@ -63,13 +62,13 @@ public class UI {
 
 
     //display cross safely when crosswalk is on walk signal
-    public void crossSafelyWithCrosswalk() {
+    public void crossSafelyWithCrosswalk(FroggoInfo froggoInfo) {
         System.out.println("\nThey hear a human walking beside them, and hear the human startle when they notice " + froggoInfo.getName() + ".");
         System.out.println(froggoInfo.getName() + " gets to the other side safely! When they get home, you're waiting for them!");
         System.out.println("You give " + froggoInfo.getName() + " some yummy " + froggoInfo.getFavoriteFood() + "!");
     }
 
-    public void crossToOtherSideOfRoad() {
+    public void crossToOtherSideOfRoad(FroggoInfo froggoInfo) {
         System.out.println("\n" + froggoInfo.getName() + " gets to the other side safely! When they get home, you're waiting for them!");
         System.out.println("You give " + froggoInfo.getName() + " some yummy " + froggoInfo.getFavoriteFood() + "!");
     }
@@ -83,43 +82,40 @@ public class UI {
         return false;
     }
 
-    //prompt for froggo info, store info, and store in object in FroggoInfo
-    public int getInfo() {
-
+    //receive name input
+    public String receiveNameInput() {
 
         System.out.println("\nFirst, we need to know a bit about your froggo to help them.");
-
-        //receive name input
         System.out.println("What's their name?");
-        String name = myScanner.nextLine();
-        froggoInfo.setName(name);
+        return myScanner.nextLine();
+    }
 
+    public String receiveFavoriteColorInput() {
         //receive favorite color input
         System.out.println("What's their favorite color?");
-        String favoriteColor = myScanner.nextLine();
-        froggoInfo.setFavoriteColor(favoriteColor);
+        return myScanner.nextLine();
+    }
 
-        //receive favorite number input
-        System.out.println("What's their favorite number? Please enter a number, " + froggoInfo.getName() + " can count from 1-10 :)");
-        String favoriteNumber = myScanner.nextLine();
-
-        //entry validation
-        while (!favoriteNumber.equals("1") && !favoriteNumber.equals("2") && !favoriteNumber.equals("3") &&
-                !favoriteNumber.equals("4") && !favoriteNumber.equals("5") && !favoriteNumber.equals("6") &&
-                !favoriteNumber.equals("7") && !favoriteNumber.equals("8") && !favoriteNumber.equals("9") &&
-                !favoriteNumber.equals("10")) {
-            System.out.println(froggoInfo.getName() + " can only count from 1-10, they don't know what that means :(");
-            System.out.println("Please enter a number:");
-            favoriteNumber = myScanner.nextLine();
+    //receive favorite number input with entry exception handling
+    public int receiveFavoriteNumberInput() {
+        System.out.println("What's their favorite number? Please enter a number, your froggo can count from 1-10 :)");
+        String number = myScanner.nextLine();
+        try {
+            if (Integer.parseInt(number) <= 10 && Integer.parseInt(number) > 0) {
+                return Integer.parseInt(number);
+            } else {
+                System.out.println("Your froggo can only count up to 10, they don't know what that means :(");
+                return receiveFavoriteNumberInput();
+            }
+        } catch (Exception e) {
+            System.out.println("That's not a number :(");
+            return receiveFavoriteNumberInput();
         }
-        froggoInfo.setFavoriteNumber(Integer.parseInt(favoriteNumber));
+    }
 
-        //receive favorite food input
+    public String receiveFavoriteFoodInput() {
         System.out.println("What's their favorite food?");
-        String favoriteFood = myScanner.nextLine();
-        froggoInfo.setFavoriteFood(favoriteFood);
-
-        return froggoInfo.getFavoriteNumber();
+        return myScanner.nextLine();
     }
 
 

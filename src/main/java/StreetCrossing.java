@@ -22,10 +22,10 @@ public class StreetCrossing {
 
     public boolean crossStreet() {
         Random random = new Random();
-        int randomNum = random.nextInt(10);
+        int randomNum = random.nextInt(5);
 
         //determines if they survived
-        if (randomNum == 9) {
+        if (randomNum == 4) {
             userInterface.crossAndGetHit();
             return false;
         }
